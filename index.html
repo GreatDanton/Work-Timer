@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="main.css">
+<script src="animations.js"></script>
+</head>
+
+<body>
+<div class="background">
+  <div class="container">
+    <h1 class=title>Work Timer </h1>
+
+      <div class="set-time">
+          <div class="buttons-container">
+          <h3>Set break time</h3>
+          <div class="set-break">
+            <button id="break-minus">-</button>
+            <h3 id="break-number" class="number">5</h3>
+            <button id="break-plus">+</button>
+          </div>
+          </div>
+
+          <div class="buttons-container">
+          <h3>Set work time</h3>
+          <div class="set-work">
+            <button id="work-minus">-</button>
+            <h3 id="work-number" class="number">25</h3>
+            <button id="work-plus">+</button>
+          </div>
+          </div>
+      </div><!-- end of set-time -->
+<!-- clock -->
+<div class="clock-container">
+
+    <div class="radial-progress">
+      <p class="time-state">Work</p>
+      <h2 class="time">25</h2>
+      <svg height="260px" width="260px">
+        <circle class="radial-progress-background" r="105px" cx="130px" cy="130px" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0em"></circle>
+        <circle class="radial-progress-cover" r="105px" cx="130px" cy="130px" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0"></circle>
+        <circle class="radial-progress-center" r="105px" cx="130px" cy="130px" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0em">
+        </circle>
+      </svg>
+    </div>
+
+</div>
+
+  </div>
+</div>
+
+</body>
+</html>

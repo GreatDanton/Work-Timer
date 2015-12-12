@@ -1,0 +1,135 @@
+*{
+  margin: 0 0;
+  padding: 0 0;
+}
+
+body {
+  font-size: 20px;
+  font-family: "Lato";
+}
+
+.background {
+  background-color: #222;
+  min-height: 600px;
+  height: 100vh;
+  width: 100%;
+  color: #fff;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 40px 0;
+}
+
+.title {
+  text-align: center;
+}
+
+.set-time {
+  display: flex;
+  justify-content: center;
+  margin: 50px 0;
+}
+
+.set-break {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.set-work {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.buttons-container {
+  display: flex;
+  flex-flow: column;
+  padding: 0 40px;
+}
+
+.number {
+  font-size: 40px;
+  padding: 0 10px;
+}
+
+svg {
+  transform: rotate(270deg);
+}
+
+circle {
+  stroke-width: 5px;
+  fill: transparent;
+  transform: rotate(0.1deg); // to fix Firefox
+}
+
+.radial-progress {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  position: relative;
+}
+
+.radial-progress-background {
+  stroke: #2196f3;
+  stroke-width: 8px;
+}
+
+.radial-progress-cover {
+  stroke: #fff;
+  stroke-width: 8px;
+  stroke-dashoffset: 50px;!important
+}
+
+.radial-progress-center {
+  fill: transparent;
+}
+
+.radial-fill {
+}
+
+.time-state {
+  display: flex;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+}
+
+.time {
+  display: flex;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: 3em;
+}
+
+.clock-container {
+  display: flex;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+
+/* Buttons */
+button {
+  font-size: 30px;
+  font-weight: bold;
+  font-family: 'Source Code Pro';
+  background-color: #222;
+  border: 2px solid #2196f3;
+  color:  #2196f3;
+  transition: 0.3s linear;
+  height: 48px;
+  min-width: 48px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #2196f3;
+  color: #222;
+}

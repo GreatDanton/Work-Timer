@@ -1,0 +1,132 @@
+$(document).ready(function(){
+
+  var $workTime = parseInt($('.time').text());
+  var $breakTime = parseInt($('#break-number').text());
+
+
+  $("#work-minus").click(function() {
+    if ($workTime > 1){
+      $workTime = ($workTime - 1);
+      $(".time").text($workTime);
+      $("#work-number").text($workTime);
+    }
+});
+
+  $("#work-plus").click(function(){
+    $workTime = ($workTime + 1);
+    $(".time").text($workTime);
+    $("#work-number").text($workTime);
+  });
+
+  $("#break-minus").click(function(){
+    if ($breakTime > 0) {
+      $breakTime = ($breakTime - 1);
+      $("#break-number").text($breakTime);
+    }
+  });
+
+  $("#break-plus").click(function(){
+    $breakTime = ($breakTime + 1);
+    $("#break-number").text($breakTime);
+  });
+
+  var click = 1;
+  $(".clock-container").click(function(){
+    click = click + 1;
+    if (click === 2) {
+      Clock.start();
+    } else if (click % 2 === 1) {
+      Clock.pause();
+    } else {
+      Clock.resume();
+    }
+  });
+
+
+  var time = 0;
+  var currentCount = 1;
+
+  var Clock = {
+    start: function() {
+
+      this.interval = setInterval(function() {
+        $workTime = parseInt($("#work-number").text());
+        var workInSeconds = $workTime*60;
+        $breakTime = parseInt($("#break-number").text());
+        var breakInSeconds = $breakTime*60;
+
+        time = time + 1;
+        var remainingTime = workInSeconds - time;
+
+        switch (true) {
+          case (remainingTime < 0):
+            $('.time-state').text("Break");
+            var breakTime = breakInSeconds + remainingTime;
+            var minutes = Math.floor(breakTime / 60);
+            var seconds = breakTime % (minutes * 60);
+            if (breakTime < 60) {
+              var seconds = breakInSeconds + remainingTime;
+              if (breakTime === 0) {
+                var minutes = '0';
+                var seconds = '00';
+              } else if (breakTime < 0) {
+                var remainingTime = 0;
+                time = 0;
+                var remainingTime = workInSeconds - time;
+                $('.time-state').text("Work");
+                $('.time').text($workTime + ':00');
+                return false;
+              }
+            }
+            break;
+          case (remainingTime === 0):
+            var minutes = '0';
+            var seconds = '00';
+            currentCount = 0;
+            break;
+          case (remainingTime < 60):
+            var seconds = remainingTime;
+            var minutes = '0';
+            break;
+          case (remainingTime >= 60):
+            var minutes = Math.floor(remainingTime / 60);
+            var seconds = remainingTime % (minutes*60);
+            break;
+          default: console.log("default");
+          break;
+
+        }
+        if (seconds < 10 && seconds > 0) {
+          seconds = '0'+seconds
+        }
+        $('.time').text(minutes + ':' + seconds);
+
+        // rotating ring around the clock
+        var radius = 105;
+        var circumference = 2 * radius * Math.PI;
+        if ($('.time-state').text() === 'Work') {
+        var maxCount = workInSeconds;
+        var offset = -(circumference / maxCount) * currentCount;
+        $('.radial-progress-cover').css('stroke-dasharray', circumference);
+        $('.radial-progress-cover').css('stroke-dashoffset', offset);
+        currentCount +=1;
+      } else {
+        var maxCount = breakInSeconds;
+        var offset = -(circumference / maxCount) * currentCount;
+        $('.radial-progress-cover').css('stroke-dasharray', circumference);
+        $('.radial-progress-cover').css('stroke-dashoffset', offset);
+        currentCount +=1;
+      }
+    }, 1000);
+  },
+  pause: function() {
+    clearInterval(this.interval);
+    delete this.interval;
+  },
+  resume: function() {
+    if(!this.interval) this.start();
+  }
+  };
+
+
+});
