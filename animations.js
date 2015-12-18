@@ -2,32 +2,62 @@ $(document).ready(function(){
 
   var $workTime = parseInt($('.time').text());
   var $breakTime = parseInt($('#break-number').text());
+  var audio = new Audio('Monsterkillsound.mp3');
 
+  function work(thing) {
+        int = setInterval(function () {
+            if (thing === 'plus' && $workTime >=1) {
+              $workTime++;
+            } else if ($workTime > 1 && thing === 'minus') {
+              $workTime--;
+            }
+            $(".time").html($workTime);
+            $("#work-number").text($workTime);
+        }, 75);
+  }
 
-  $("#work-minus").click(function() {
-    if ($workTime > 1){
-      $workTime = ($workTime - 1);
-      $(".time").text($workTime);
-      $("#work-number").text($workTime);
-    }
-});
+  function breakFunction(thing) {
+    int = setInterval(function () {
+        if (thing === 'plus') {
+          $breakTime++;
+        } else if (thing === 'minus' && $breakTime >= 1) {
+          $breakTime--;
+        }
+        $("#break-number").text($breakTime);
+    }, 75);
+  }
 
-  $("#work-plus").click(function(){
-    $workTime = ($workTime + 1);
-    $(".time").text($workTime);
-    $("#work-number").text($workTime);
+  $("#work-minus").mousedown(function() {
+    //if ($workTime > 1){
+      //$workTime = ($workTime - 1);
+      //$(".time").text($workTime);
+      work('minus');
+    //}
+})
+
+  $("#work-plus").mousedown(function(){
+    //$workTime = ($workTime + 1);
+    //$(".time").text($workTime);
+    //$("#work-number").text($workTime);
+    work('plus');
+  })
+
+  $("#break-minus").mousedown(function(){
+    //if ($breakTime > 0) {
+    //  $breakTime = ($breakTime - 1);
+      //$("#break-number").text($breakTime);
+    //}
+    breakFunction('minus');
   });
 
-  $("#break-minus").click(function(){
-    if ($breakTime > 0) {
-      $breakTime = ($breakTime - 1);
-      $("#break-number").text($breakTime);
-    }
+  $("#break-plus").mousedown(function(){
+    //$breakTime = ($breakTime + 1);
+    //$("#break-number").text($breakTime);
+    breakFunction('plus');
   });
 
-  $("#break-plus").click(function(){
-    $breakTime = ($breakTime + 1);
-    $("#break-number").text($breakTime);
+  $(document).on("mouseup", function(){
+    clearInterval(int);
   });
 
   var click = 1;
@@ -75,6 +105,7 @@ $(document).ready(function(){
                 var remainingTime = workInSeconds - time;
                 $('.time-state').text("Work");
                 $('.time').text($workTime + ':00');
+                audio.play();
                 return false;
               }
             }
@@ -83,6 +114,7 @@ $(document).ready(function(){
             var minutes = '0';
             var seconds = '00';
             currentCount = 0;
+            audio.play();
             break;
           case (remainingTime < 60):
             var seconds = remainingTime;
