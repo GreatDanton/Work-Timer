@@ -100,6 +100,7 @@ $(document).ready(function(){
                 var minutes = '0';
                 var seconds = '00';
               } else if (breakTime < 0) {
+                currentCount = 0;
                 var remainingTime = 0;
                 time = 0;
                 var remainingTime = workInSeconds - time;
