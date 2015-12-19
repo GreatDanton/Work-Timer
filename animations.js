@@ -99,14 +99,14 @@ $(document).ready(function(){
               if (breakTime === 0) {
                 var minutes = '0';
                 var seconds = '00';
-              } else if (breakTime < 0) {
                 currentCount = 0;
+                audio.play();
+              } else if (breakTime < 0) {
                 var remainingTime = 0;
                 time = 0;
                 var remainingTime = workInSeconds - time;
                 $('.time-state').text("Work");
                 $('.time').text($workTime + ':00');
-                audio.play();
                 return false;
               }
             }
